@@ -1,0 +1,7 @@
+{
+"shapes":[
+	{"name":"Cube", "shape":"cube", "center":[0, 0, 0], "radius":[1, 1, 1]},
+	{"name":"Sphere", "shape":"sphere", "center":[0, 0, 0], "radius":1},
+	{"name":"Cylinder", "shape":"cylinder", "center":[0, 0, 0], "radius":1, "start":[0, -1, 0], "end":[0, 1, 0]}
+]
+}
