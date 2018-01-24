@@ -89,4 +89,8 @@ CSG.prototype.toThreeGeometry = function () {
 	});
 	
 	return geometry;
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 2ed7c4d30d50676144afe22645df89c3b95bf697

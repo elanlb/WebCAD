@@ -21,6 +21,7 @@
 			<div class="row">
 				<div class="col-8" id="editor"></div>
 				<div class="col-4">
+<<<<<<< HEAD
 					<h2>Controls</h2>					
 						
 						<label for="shapeSelector">Shape</label>
@@ -63,6 +64,11 @@
 						</tr>
 					</table>
 					<button class="btn btn-primary btn-block" id="updateButton">Update</button>
+=======
+					<div class="container" id="controls">
+						<h2>Controls</h2>
+					</div>
+>>>>>>> 2ed7c4d30d50676144afe22645df89c3b95bf697
 				</div>
 			</div>
 			<div class="row">
@@ -70,7 +76,11 @@
 					<?php
 					echo '{
 "shapes":[
+<<<<<<< HEAD
 	{"name":"BigCube", "shape":"cube", "center":[-0.25, -0.25, -0.25], "radius":[1, 1, 1]},
+=======
+	{"name":"BigCube", "shape":"cube", "center":[-0.25, -0.25, -0.25]},
+>>>>>>> 2ed7c4d30d50676144afe22645df89c3b95bf697
 	{"name":"Sphere", "shape":"sphere", "center":[0.25, 0.25, 0.25], "radius":1.3}
 ],
 "operations":[

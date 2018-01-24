@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+console.log("Editor script initializing.");
+
+>>>>>>> 2ed7c4d30d50676144afe22645df89c3b95bf697
 // test for WebGL compatability
 if (!Detector.webgl) {
 	Detector.addGetWebGLMessage();
@@ -54,6 +59,7 @@ render();
 
 
 //
+<<<<<<< HEAD
 // load shapes from file and load initial UI
 //
 
@@ -73,6 +79,16 @@ function updateGeometry () {
 	// make these global variables so that other functions can access them
 	shapes = objects.shapes;
 	operations = objects.operations;
+=======
+// load shapes from file
+//
+$(document).ready(function () {
+	// parse the json loaded from the DB in #json
+	var objects = JSON.parse(document.getElementById("json").innerText);
+	
+	var shapes = objects.shapes;
+	var operations = objects.operations;
+>>>>>>> 2ed7c4d30d50676144afe22645df89c3b95bf697
 	
 	var thingsToRun = [];
 	
@@ -84,11 +100,19 @@ function updateGeometry () {
 			codeToRun += "center:[" + shape.center + "],";
 		}
 		
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 2ed7c4d30d50676144afe22645df89c3b95bf697
 		if (shape.radius != null) {
 			codeToRun += "radius:[" + shape.radius + "],";
 		}
 		
 		codeToRun += "})";
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 2ed7c4d30d50676144afe22645df89c3b95bf697
 		thingsToRun.push(codeToRun);
 	});
 	
@@ -109,6 +133,7 @@ function updateGeometry () {
 	var material = new THREE.MeshStandardMaterial({color: 0xff0000});
 	var mesh = new THREE.Mesh(geometry, material);
 	scene.add(mesh);
+<<<<<<< HEAD
 }
 
 function updateShapeList () {
@@ -190,3 +215,22 @@ function updateJSON () {
 	updateShapeList();
 	updateUI();
 }
+=======
+	
+	//
+	// load the UI
+	//
+	shapes.forEach(function (shape) {
+		var controlsDiv = $("<div></div>");
+		controlsDiv.addClass("row");
+		
+		var nameField = $("<input>");
+		nameField.addClass("form-control");
+		nameField.attr("type", "text");
+		nameField.attr("value", shape.name);
+		controlsDiv.append(nameField);
+		
+		$("#controls").append(controlsDiv);
+	});
+});
+>>>>>>> 2ed7c4d30d50676144afe22645df89c3b95bf697
