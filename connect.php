@@ -1,7 +1,7 @@
 <?php
 $dbserver = "localhost";
-$dbusername = "id4198359_elan";
-$dbpassword = "fjd7DF#Hfd9j";
+$dbusername = "username";
+$dbpassword = "password";
 
 try {
 	$pdo = new PDO("mysql:host=$dbserver;dbname=id4198359_users", $dbusername, $dbpassword);
