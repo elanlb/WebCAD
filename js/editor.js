@@ -77,6 +77,16 @@ $(document).ready(function () {
 		updateShapeList();
 		updateUI();
 	});
+
+	$("#addCube").click(function () {
+		objects.shapes.push({"name":"cube", "shape":"cube", "center":[0, 0, 0], "radius":[1, 1, 1]});
+	});
+	$("#addSphere").click(function () {
+		objects.shapes.push({"name":"sphere", "shape":"sphere", "center":[0, 0, 0], "radius":1});
+	});
+	$("#addCylinder").click(function () {
+		objects.shapes.push({"name":"cylinder", "shape":"cylinder", "center":[0, 0, 0], "radius":1});
+	});
 });
 
 function updateGeometry () {

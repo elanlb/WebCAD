@@ -21,12 +21,17 @@
 			<div class="row">
 				<div class="col-8" id="editor"></div>
 				<div class="col-4">
-					<h2>Controls</h2>
-						<label for="shapeSelector">Shape</label>
-						<select class="form-control" id="shapeSelector"></select>
+					<table class="table"><tr>
+						<td><button class="btn btn-outline-secondary" id="addCube"><img src="images/cube.png"></button></td>
+						<td><button class="btn btn-outline-secondary" id="addSphere"><img src="images/sphere.png"></button></td>
+						<td><button class="btn btn-outline-secondary" id="addCylinder"><img src="images/cylinder.png"></button></td>
+					</tr></table>
 
-						<label for="nameField">Name</label>
-						<input class="form-control" type="text" id="nameField">
+					<label for="shapeSelector">Shape</label>
+					<select class="form-control" id="shapeSelector"></select>
+
+					<label for="nameField">Name</label>
+					<input class="form-control" type="text" id="nameField">
 
 					<table>
 						<tr>
