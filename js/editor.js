@@ -68,26 +68,31 @@ $(document).ready(function () {
 		updateUI();
 	});
 
-	$("#updateButton").click(function () {
-		updateJSON();
-		// update the geometry
-		updateGeometry();
-
-		// update the properties menu
-		updateShapeList();
-		updateUI();
-	});
+	$("#updateButton").click(update());
 
 	$("#addCube").click(function () {
 		objects.shapes.push({"name":"cube", "shape":"cube", "center":[0, 0, 0], "radius":[1, 1, 1]});
+		update();
 	});
 	$("#addSphere").click(function () {
 		objects.shapes.push({"name":"sphere", "shape":"sphere", "center":[0, 0, 0], "radius":1});
+		update();
 	});
 	$("#addCylinder").click(function () {
 		objects.shapes.push({"name":"cylinder", "shape":"cylinder", "center":[0, 0, 0], "radius":1});
+		update();
 	});
 });
+
+function update () {
+	updateJSON();
+	// update the geometry
+	updateGeometry();
+
+	// update the properties menu
+	updateShapeList();
+	updateUI();
+}
 
 function updateGeometry () {
 	// parse the json loaded from the DB in #json

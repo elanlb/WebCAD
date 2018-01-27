@@ -69,15 +69,9 @@
 			<div class="row">
 				<code id="json">
 					<?php
-					echo '{
-"shapes":[
-	{"name":"BigCube", "shape":"cube", "center":[0, 0, 0], "radius":[1, 1, 1]},
-	{"name":"Sphere", "shape":"sphere", "center":[0.7, 0.7, 0.7], "radius":1.5}
-],
-"operations":[
-	{"operation":"subtract", "object":1}
-]
-}';
+					echo '{"shapes":[{"name":"BigCube", "shape":"cube", "center":[0, 0, 0], "radius":[1, 1, 1]},
+					{"name":"Sphere", "shape":"sphere", "center":[0.7, 0.7, 0.7], "radius":1.5}],
+					"operations":[{"operation":"subtract", "object":1}]}';
 					?>
 				</code>
 			</div>
