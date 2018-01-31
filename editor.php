@@ -22,9 +22,10 @@
 				<div class="col-8" id="editor"></div>
 				<div class="col-4">
 					<table class="table"><tr>
-						<td><button class="btn btn-outline-secondary" id="addCube"><img src="images/cube.png"></button></td>
-						<td><button class="btn btn-outline-secondary" id="addSphere"><img src="images/sphere.png"></button></td>
-						<td><button class="btn btn-outline-secondary" id="addCylinder"><img src="images/cylinder.png"></button></td>
+						<td><button class="btn btn-info" id="addCube"><img src="images/cube.png"></button></td>
+						<td><button class="btn btn-info" id="addSphere"><img src="images/sphere.png"></button></td>
+						<td><button class="btn btn-info" id="addCylinder"><img src="images/cylinder.png"></button></td>
+						<td><button class="btn btn-warning" id="removeShape"><img src="images/delete.png"></button></td>
 					</tr></table>
 
 					<label for="shapeSelector">Shape</label>

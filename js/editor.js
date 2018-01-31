@@ -82,15 +82,28 @@ $(document).ready(function () {
 		objects.shapes.push({"name":"cylinder", "shape":"cylinder", "center":[0, 0, 0], "radius":1});
 		update();
 	});
+	$("#removeShape").click(function () {
+		var selectedShape = parseInt($("#shapeSelector").val());
+		objects.shapes.splice(selectedShape);
+
+		if (selectedShape - 1 >= 0) {
+			var previousShape = $("#shapeSelector").children().first().val();
+			$("#shapeSelector").val(previousShape);
+
+			console.log("Rm");
+		}
+		updateShapeList();
+	})
 });
 
 function update () {
+	updateShapeList(); // the update json needs the shape list to work
+
 	updateJSON();
 	// update the geometry
 	updateGeometry();
 
 	// update the properties menu
-	updateShapeList();
 	updateUI();
 }
 
@@ -120,7 +133,7 @@ function updateGeometry () {
 	});
 
 	// reset this so that we can do the operations
-	codeToRun = "var output = shape0";
+	codeToRun = "var output = shape0"; // start with shape0
 	operations.forEach(function (operation) {
 		codeToRun += "." + operation.operation + "(shape" + operation.object + ")";
 	});
@@ -160,10 +173,11 @@ function updateShapeList () {
 		$("#shapeSelector").append(option);
 	});
 
-	if (currentShapeNumber != null) {
+	if (currentShapeNumber != null && objects.shapes[currentShapeNumber] != null) {
 		$("#shapeSelector").val(
 			$("#shapeSelector option").get(currentShapeNumber).text
 		);
+		console.log("update shape list");
 	}
 }
 
