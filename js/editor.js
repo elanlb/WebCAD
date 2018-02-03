@@ -64,12 +64,6 @@ $(document).ready(function () {
 
 	updateUI();
 
-	$("#shapeSelector").change(function () {
-		updateUI();
-	});
-
-	$("#updateButton").click(update());
-
 	$("#addCube").click(function () {
 		objects.shapes.push({"name":"cube", "shape":"cube", "center":[0, 0, 0], "radius":[1, 1, 1]});
 		update();
@@ -84,16 +78,21 @@ $(document).ready(function () {
 	});
 	$("#removeShape").click(function () {
 		var selectedShape = parseInt($("#shapeSelector").val());
-		objects.shapes.splice(selectedShape);
+		objects.shapes.splice(selectedShape, 1); // remove the current shape
 
 		if (selectedShape - 1 >= 0) {
-			var previousShape = $("#shapeSelector").children().first().val();
-			$("#shapeSelector").val(previousShape);
-
-			console.log("Rm");
+			var previousShape = $("#shapeSelector").children().eq(selectedShape - 1).val();
 		}
-		updateShapeList();
-	})
+		update();
+
+		$("#shapeSelector").val(previousShape);
+	});
+
+	$("#shapeSelector").change(function () {
+		updateUI();
+	});
+
+	$("#updateButton").click(update);
 });
 
 function update () {
@@ -105,20 +104,42 @@ function update () {
 
 	// update the properties menu
 	updateUI();
+
+	updateShapeList(); // one more time to set shape names after read by updateJSON
+}
+
+function updateShapeList () {
+	// get the current selection so that the list stays on the same item after they update
+	if ($("#shapeSelector option").length) {
+		var currentShapeNumber = parseInt($("#shapeSelector").val());
+	}
+
+	// update the list to select the shape to edit
+	$("#shapeSelector").empty();
+
+	objects.shapes.forEach(function (shape) {
+		var option = $("<option></option>");
+		option.text(objects.shapes.indexOf(shape) + ": " + shape.name);
+		$("#shapeSelector").append(option);
+	});
+
+	if (currentShapeNumber != null && objects.shapes[currentShapeNumber] != null) {
+		$("#shapeSelector").val(
+			$("#shapeSelector option").get(currentShapeNumber).text
+		);
+		console.log("update shape list");
+	}
 }
 
 function updateGeometry () {
 	// parse the json loaded from the DB in #json
 	objects = JSON.parse(document.getElementById("json").innerText);
-	// make these global variables so that other functions can access them
-	shapes = objects.shapes;
-	operations = objects.operations;
 
-	var thingsToRun = [];
+	var thingsToRun = []; // array containing code to execute to generate the shapes
 
-	shapes.forEach(function (shape) {
+	objects.shapes.forEach(function (shape) {
 		// now check which attributes the shape has and add if they don't
-		var codeToRun = "var shape" + shapes.indexOf(shape) + " = CSG." + shape.shape + "({";
+		var codeToRun = "var shape" + objects.shapes.indexOf(shape) + " = CSG." + shape.shape + "({";
 
 		if (shape.center != null) {
 			codeToRun += "center:[" + shape.center + "],";
@@ -134,7 +155,7 @@ function updateGeometry () {
 
 	// reset this so that we can do the operations
 	codeToRun = "var output = shape0"; // start with shape0
-	operations.forEach(function (operation) {
+	objects.operations.forEach(function (operation) {
 		codeToRun += "." + operation.operation + "(shape" + operation.object + ")";
 	});
 	thingsToRun.push(codeToRun);
@@ -156,29 +177,6 @@ function updateGeometry () {
 	var material = new THREE.MeshStandardMaterial({color: 0xff0000});
 	var mesh = new THREE.Mesh(geometry, material);
 	scene.add(mesh);
-}
-
-function updateShapeList () {
-	// get the current selection so that the list stays on the same item after they update
-	if ($("#shapeSelector option").length) {
-		var currentShapeNumber = parseInt($("#shapeSelector").val());
-	}
-
-	// update the list to select the shape to edit
-	$("#shapeSelector").empty();
-
-	objects.shapes.forEach(function (shape) {
-		var option = $("<option></option>");
-		option.text(shapes.indexOf(shape) + ": " + shape.name);
-		$("#shapeSelector").append(option);
-	});
-
-	if (currentShapeNumber != null && objects.shapes[currentShapeNumber] != null) {
-		$("#shapeSelector").val(
-			$("#shapeSelector option").get(currentShapeNumber).text
-		);
-		console.log("update shape list");
-	}
 }
 
 function updateUI () {

@@ -35,35 +35,62 @@
 					<input class="form-control" type="text" id="nameField">
 
 					<table>
-						<tr>
-							<td>
-								<label for="xPosition">x</label>
-								<input class="form-control" type="number" id="xPosition">
-							</td>
-							<td>
-								<label for="yPosition">y</label>
-								<input class="form-control" type="number" id="yPosition">
-							</td>
-							<td>
-								<label for="zPosition">z</label>
-								<input class="form-control" type="number" id="zPosition">
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label for="xRadius">x radius</label>
-								<input class="form-control" type="number" id="xRadius">
-							</td>
-							<td>
-								<label for="yRadius">y radius</label>
-								<input class="form-control" type="number" id="yRadius">
-							</td>
-							<td>
-								<label for="zRadius">z radius</label>
-								<input class="form-control" type="number" id="zRadius">
-							</td>
-						</tr>
+					<tr><td>
+						<label for="xPosition">x</label>
+						<input class="form-control" type="number" id="xPosition">
+					</td>
+					<td>
+						<label for="yPosition">y</label>
+						<input class="form-control" type="number" id="yPosition">
+					</td>
+					<td>
+						<label for="zPosition">z</label>
+						<input class="form-control" type="number" id="zPosition">
+					</td></tr>
+
+					<tr><td>
+						<label for="xRadius">x radius</label>
+						<input class="form-control" type="number" id="xRadius">
+					</td>
+					<td>
+						<label for="yRadius">y radius</label>
+						<input class="form-control" type="number" id="yRadius">
+					</td>
+					<td>
+						<label for="zRadius">z radius</label>
+						<input class="form-control" type="number" id="zRadius">
+					</td></tr>
+
+					<tr><td>
+						<label for="xStart">x start</label>
+						<input class="form-control" type="number" id="xStart">
+					</td>
+					<td>
+						<label for="yStart">y start</label>
+						<input class="form-control" type="number" id="yStart">
+					</td>
+					<td>
+						<label for="zStart">z start</label>
+						<input class="form-control" type="number" id="zStart">
+					</td></tr>
+
+					<tr><td>
+						<label for="xEnd">x end</label>
+						<input class="form-control" type="number" id="xEnd">
+					</td>
+					<td>
+						<label for="yEnd">y end</label>
+						<input class="form-control" type="number" id="yEnd">
+					</td>
+					<td>
+						<label for="zEnd">z end</label>
+						<input class="form-control" type="number" id="zEnd">
+					</td></tr>
 					</table>
+
+					<label for="operationSelector">Operation</label>
+					<select class="form-control" id="operationSelector"></select>
+
 					<button class="btn btn-primary btn-block" id="updateButton">Update</button>
 				</div>
 			</div>
