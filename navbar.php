@@ -8,7 +8,6 @@
 		<div class="navbar-nav">
 			<a class="nav-item nav-link" href="/index.php">Home</a>
 			<a class="nav-item nav-link" href="/editor.php">Editor</a>
-			<a class="nav-item nav-link" href="/about.php">About</a>
 			<a class="nav-item nav-link" href="/account.php">Account</a>
 			<a class="nav-item nav-link" href="https://github.com/elanlb/WebCAD">GitHub</a>
 		</div>
