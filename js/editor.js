@@ -127,13 +127,12 @@ function updateShapeList () {
 		$("#shapeSelector").val(
 			$("#shapeSelector option").get(currentShapeNumber).text
 		);
-		console.log("update shape list");
 	}
 }
 
 function updateGeometry () {
 	// parse the json loaded from the DB in #json
-	objects = JSON.parse(document.getElementById("json").innerText);
+	objects = JSON.parse(document.getElementById("json").value);
 
 	var thingsToRun = []; // array containing code to execute to generate the shapes
 
@@ -155,8 +154,10 @@ function updateGeometry () {
 
 	// reset this so that we can do the operations
 	codeToRun = "var output = shape0"; // start with shape0
-	objects.operations.forEach(function (operation) {
-		codeToRun += "." + operation.operation + "(shape" + operation.object + ")";
+	objects.shapes.forEach(function (shape, index) {
+		if (index > 0) {
+			codeToRun += "." + shape.operation + "(shape" + objects.shapes.indexOf(shape) + ")";
+		}
 	});
 	thingsToRun.push(codeToRun);
 
@@ -216,6 +217,16 @@ function updateUI () {
 		$("#yRadius").val(1);
 		$("#zRadius").val(1);
 	}
+
+	// set the operation selector
+	if (shape.operation != null) {
+		$("#operationSelector").prop("disabled", false);
+		$("#operationSelector").val(shape.operation);
+	}
+	else {
+		$("#operationSelector").prop("disabled", true);
+		$("#operationSelector").val("");
+	}
 }
 
 function updateJSON () {
@@ -237,6 +248,8 @@ function updateJSON () {
 	else {
 		shape.radius = parseFloat($("#xRadius").val());
 	}
+
+	shape.operation = $("#operationSelector").val();
 
 	// update the JSON string with the new values
 	objects.shapes[parseInt(shapeName)] = shape;

@@ -104,20 +104,23 @@
 			</table>
 
 			<label for="operationSelector">Operation</label>
-			<select class="form-control" id="operationSelector"></select>
+			<select class="form-control" id="operationSelector">
+				<option>union</option>
+				<option>subtract</option>
+				<option>intersect</option>
+			</select>
 
 			<button class="btn btn-primary btn-block" id="updateButton">Update</button>
 		</div>
 	</div>
-	<div class="row">
-		<code id="json">
-			<?php
-				echo '{"shapes":[{"name":"BigCube", "shape":"cube", "center":[0, 0, 0], "radius":[1, 1, 1]},
-				{"name":"Sphere", "shape":"sphere", "center":[0.7, 0.7, 0.7], "radius":1.5}],
-				"operations":[{"operation":"subtract", "object":1}]}';
-				?>
-		</code>
-	</div>
+	<div class="row"><div class="column form-group">
+		<textarea class="form-control" cols="50" id="json">
+			{"shapes":[
+				{"name":"BigCube", "shape":"cube", "center":[0, 0, 0], "radius":[1, 1, 1]},
+				{"name":"Sphere", "shape":"sphere", "center":[0.7, 0.7, 0.7], "radius":1.5, "operation":"subtract"}
+			]}
+		</textarea>
+	</div></div>
 </div>
 
 <!-- Optional JavaScript -->
