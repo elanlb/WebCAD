@@ -65,15 +65,15 @@ $(document).ready(function () {
 	updateUI();
 
 	$("#addCube").click(function () {
-		objects.shapes.push({"name":"cube", "shape":"cube", "center":[0, 0, 0], "radius":[1, 1, 1]});
+		objects.shapes.push({"name":"cube", "shape":"cube", "center":[0, 0, 0], "radius":[1, 1, 1], "operation":"union"});
 		update();
 	});
 	$("#addSphere").click(function () {
-		objects.shapes.push({"name":"sphere", "shape":"sphere", "center":[0, 0, 0], "radius":1});
+		objects.shapes.push({"name":"sphere", "shape":"sphere", "center":[0, 0, 0], "radius":1, "operation":"union"});
 		update();
 	});
 	$("#addCylinder").click(function () {
-		objects.shapes.push({"name":"cylinder", "shape":"cylinder", "center":[0, 0, 0], "radius":1});
+		objects.shapes.push({"name":"cylinder", "shape":"cylinder", "center":[0, 0, 0], "radius":1, "start":[0, -1, 0], "end":[0, 1, 0], "operation":"union"});
 		update();
 	});
 	$("#removeShape").click(function () {
@@ -148,6 +148,14 @@ function updateGeometry () {
 			codeToRun += "radius:[" + shape.radius + "],";
 		}
 
+		// if the shape is a cylinder and has a start and end, set them
+		if (shape.start != null) {
+			codeToRun += "start:[" + shape.start + "],";
+		}
+		if (shape.end != null) {
+			codeToRun += "end:[" + shape.end + "],";
+		}
+
 		codeToRun += "})";
 		thingsToRun.push(codeToRun);
 	});
@@ -218,10 +226,36 @@ function updateUI () {
 		$("#zRadius").val(1);
 	}
 
+	// if the shape is a cylinder, set the start and end
+	// otherwise, disable those fields and set them to blank
+	if (shape.shape == "cylinder") {
+		$("#xStart").prop("disabled", false); $("#xStart").val(shape.start[0]);
+		$("#yStart").prop("disabled", false); $("#yStart").val(shape.start[1]);
+		$("#zStart").prop("disabled", false); $("#zStart").val(shape.start[2]);
+		$("#xEnd").prop("disabled", false); $("#xEnd").val(shape.end[0]);
+		$("#yEnd").prop("disabled", false); $("#yEnd").val(shape.end[1]);
+		$("#zEnd").prop("disabled", false); $("#zEnd").val(shape.end[2]);
+	}
+	else {
+		$("#xStart").prop("disabled", true); $("#xStart").val("");
+		$("#yStart").prop("disabled", true); $("#yStart").val("");
+		$("#zStart").prop("disabled", true); $("#zStart").val("");
+		$("#xEnd").prop("disabled", true); $("#xEnd").val("");
+		$("#yEnd").prop("disabled", true); $("#yEnd").val("");
+		$("#zEnd").prop("disabled", true); $("#zEnd").val("");
+	}
+
 	// set the operation selector
-	if (shape.operation != null) {
-		$("#operationSelector").prop("disabled", false);
-		$("#operationSelector").val(shape.operation);
+	// check if the shape isn't the first
+	if (objects.shapes.indexOf(shape) > 0) {
+		if (shape.operation != null) {
+			$("#operationSelector").prop("disabled", false);
+			$("#operationSelector").val(shape.operation);
+		}
+		else {
+			$("#operationSelector").prop("disabled", false);
+			$("#operationSelector").val("union");
+		}
 	}
 	else {
 		$("#operationSelector").prop("disabled", true);
@@ -247,6 +281,19 @@ function updateJSON () {
 	}
 	else {
 		shape.radius = parseFloat($("#xRadius").val());
+	}
+
+	// check if the shape is a cylinder to set the start and end values
+	if (shape.shape == "cylinder") {
+		shape.start[0] = parseFloat($("#xStart").val());
+		shape.start[1] = parseFloat($("#yStart").val());
+		shape.start[2] = parseFloat($("#zStart").val());
+		shape.end[0] = parseFloat($("#xEnd").val());
+		shape.end[1] = parseFloat($("#yEnd").val());
+		shape.end[2] = parseFloat($("#zEnd").val());
+	}
+	else {
+		// if it's not a cylinder, do nothing
 	}
 
 	shape.operation = $("#operationSelector").val();
